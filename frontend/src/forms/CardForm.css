@@ -1,0 +1,542 @@
+/* ===================================
+   ProCard SaaS - Premium Card Creator
+   Font: Inter (High-End SaaS Standard)
+   =================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ===================================
+   WRAPPER & CONTAINER
+   =================================== */
+
+.card-form-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  padding: 48px 24px;
+}
+
+.card-form-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ===================================
+   LEFT: FORM CARD (Clean & Modern)
+   =================================== */
+
+.form-card {
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.3s ease;
+}
+
+.form-card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.form-header {
+  margin-bottom: 32px;
+}
+
+.form-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #111827;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.025em;
+}
+
+.form-subtitle {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* ===================================
+   FORM SECTIONS
+   =================================== */
+
+.form-section {
+  margin-bottom: 24px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 16px 0;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+/* ===================================
+   PREMIUM INPUTS (Tall & Modern)
+   =================================== */
+
+.premium-input,
+.premium-textarea {
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+.premium-input:hover,
+.premium-textarea:hover {
+  border-color: #d1d5db;
+}
+
+.premium-input:focus,
+.premium-textarea:focus,
+.premium-input.ant-input-focused,
+.premium-textarea.ant-input-focused {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  outline: none;
+}
+
+.premium-textarea {
+  height: auto;
+  padding: 12px 16px;
+}
+
+.input-icon {
+  color: #9ca3af;
+  font-size: 16px;
+}
+
+/* Ant Design Input Overrides */
+.ant-input-affix-wrapper {
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.ant-input-affix-wrapper:hover {
+  border-color: #d1d5db;
+}
+
+.ant-input-affix-wrapper-focused {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+}
+
+/* Form Item Labels */
+.ant-form-item-label>label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  height: auto;
+}
+
+.ant-form-item-extra {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+/* ===================================
+   COLOR PICKER
+   =================================== */
+
+.premium-color-picker {
+  height: 48px;
+}
+
+.premium-color-picker .ant-color-picker-trigger {
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+/* ===================================
+   SUBMIT BUTTON (Premium Feel)
+   =================================== */
+
+.premium-submit-btn {
+  height: 56px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  border: none;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  transition: all 0.3s ease;
+}
+
+.premium-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+}
+
+.premium-submit-btn:active {
+  transform: translateY(0);
+}
+
+/* ===================================
+   RIGHT: PREVIEW CONTAINER
+   =================================== */
+
+.preview-container {
+  position: sticky;
+  top: 48px;
+}
+
+.preview-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.preview-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+}
+
+/* ===================================
+   IPHONE MOCKUP (Realistic Design)
+   =================================== */
+
+.iphone-mockup {
+  display: flex;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+.iphone-frame {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  background: #1f2937;
+  border-radius: 40px;
+  padding: 12px;
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 2px 4px 0 rgba(255, 255, 255, 0.05);
+  transform: rotateY(-3deg) rotateX(1deg);
+  transition: transform 0.6s ease;
+}
+
+.iphone-frame:hover {
+  transform: rotateY(0deg) rotateX(0deg);
+}
+
+.iphone-notch {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 28px;
+  background: #1f2937;
+  border-radius: 0 0 18px 18px;
+  z-index: 10;
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.iphone-screen {
+  background: white;
+  border-radius: 32px;
+  overflow: hidden;
+  min-height: 680px;
+  position: relative;
+}
+
+/* ===================================
+   CARD PREVIEW (Inside iPhone)
+   =================================== */
+
+.card-preview {
+  padding: 60px 32px 40px;
+  text-align: center;
+  min-height: 680px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+}
+
+/* Avatar */
+.preview-avatar-wrapper {
+  margin-bottom: 24px;
+}
+
+.preview-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.preview-avatar:hover {
+  transform: scale(1.05) rotate(5deg);
+}
+
+.avatar-text {
+  font-size: 48px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Name & Title */
+.preview-name {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111827;
+  margin: 0 0 8px;
+  letter-spacing: -0.025em;
+}
+
+.preview-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  transition: color 0.3s ease;
+}
+
+.preview-company {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0 0 16px;
+}
+
+.preview-bio {
+  font-size: 14px;
+  color: #4b5563;
+  margin: 16px 0;
+  line-height: 1.6;
+  max-width: 280px;
+}
+
+/* Contact Items */
+.preview-contacts {
+  width: 100%;
+  max-width: 300px;
+  margin: 24px 0;
+}
+
+.preview-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+  color: #6b7280;
+}
+
+.preview-contact-item:hover {
+  background: white;
+  border-color: #d1d5db;
+  transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.preview-contact-item .anticon {
+  font-size: 18px;
+}
+
+.preview-contact-item span {
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+
+/* CTA Button */
+.preview-cta {
+  margin-top: 24px;
+  padding: 16px 40px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  font-family: 'Inter', sans-serif;
+}
+
+.preview-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+}
+
+.preview-cta:active {
+  transform: translateY(-1px);
+}
+
+/* ===================================
+   DIVIDER
+   =================================== */
+
+.ant-divider {
+  border-color: #e5e7eb;
+  margin: 32px 0;
+}
+
+/* ===================================
+   RESPONSIVE (Mobile Optimization)
+   =================================== */
+
+@media (max-width: 992px) {
+  .card-form-wrapper {
+    padding: 24px 16px;
+  }
+
+  .form-card {
+    padding: 32px 24px;
+  }
+
+  .form-title {
+    font-size: 28px;
+  }
+
+  .preview-container {
+    position: relative;
+    top: 0;
+    margin-top: 48px;
+  }
+
+  .iphone-frame {
+    max-width: 340px;
+    transform: none;
+  }
+
+  .iphone-screen {
+    min-height: 600px;
+  }
+
+  .card-preview {
+    min-height: 600px;
+    padding: 50px 24px 32px;
+  }
+
+  .preview-avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .avatar-text {
+    font-size: 40px;
+  }
+
+  .preview-name {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 576px) {
+  .card-form-wrapper {
+    padding: 16px;
+  }
+
+  .form-card {
+    padding: 24px 20px;
+  }
+
+  .form-title {
+    font-size: 24px;
+  }
+
+  .form-subtitle {
+    font-size: 14px;
+  }
+
+  .section-title {
+    font-size: 16px;
+  }
+
+  .iphone-frame {
+    padding: 10px;
+    border-radius: 32px;
+  }
+
+  .iphone-screen {
+    border-radius: 24px;
+  }
+
+  .preview-contacts {
+    max-width: 260px;
+  }
+}
+
+/* ===================================
+   ACCESSIBILITY & POLISH
+   =================================== */
+
+::selection {
+  background: #2563eb;
+  color: white;
+}
+
+.ant-form-item-explain-error {
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* Loading State */
+.premium-submit-btn.ant-btn-loading {
+  opacity: 0.8;
+}
+
+/* Focus Visible (Keyboard Navigation) */
+.premium-input:focus-visible,
+.premium-submit-btn:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}

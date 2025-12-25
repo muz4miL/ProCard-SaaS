@@ -2,32 +2,24 @@ import { lazy } from 'react';
 
 import { Navigate } from 'react-router-dom';
 
+// === AUTHENTICATION ===
 const Logout = lazy(() => import('@/pages/Logout.jsx'));
 const NotFound = lazy(() => import('@/pages/NotFound.jsx'));
 
+// === CORE PAGES ===
 const Dashboard = lazy(() => import('@/pages/Dashboard'));
-const Customer = lazy(() => import('@/pages/Customer'));
-const Invoice = lazy(() => import('@/pages/Invoice'));
-const InvoiceCreate = lazy(() => import('@/pages/Invoice/InvoiceCreate'));
-
-const InvoiceRead = lazy(() => import('@/pages/Invoice/InvoiceRead'));
-const InvoiceUpdate = lazy(() => import('@/pages/Invoice/InvoiceUpdate'));
-const InvoiceRecordPayment = lazy(() => import('@/pages/Invoice/InvoiceRecordPayment'));
-const Quote = lazy(() => import('@/pages/Quote/index'));
-const QuoteCreate = lazy(() => import('@/pages/Quote/QuoteCreate'));
-const QuoteRead = lazy(() => import('@/pages/Quote/QuoteRead'));
-const QuoteUpdate = lazy(() => import('@/pages/Quote/QuoteUpdate'));
-const Payment = lazy(() => import('@/pages/Payment/index'));
-const PaymentRead = lazy(() => import('@/pages/Payment/PaymentRead'));
-const PaymentUpdate = lazy(() => import('@/pages/Payment/PaymentUpdate'));
-
-const Settings = lazy(() => import('@/pages/Settings/Settings'));
-const PaymentMode = lazy(() => import('@/pages/PaymentMode'));
-const Taxes = lazy(() => import('@/pages/Taxes'));
-
 const Profile = lazy(() => import('@/pages/Profile'));
-
 const About = lazy(() => import('@/pages/About'));
+
+// === SETTINGS ===
+const Settings = lazy(() => import('@/pages/Settings/Settings'));
+
+// === PROCARD SAAS - CARD MANAGEMENT ===
+const CardList = lazy(() => import('@/pages/Card/CardList'));
+const CardCreate = lazy(() => import('@/pages/Card/CardCreate'));
+const CardEdit = lazy(() => import('@/pages/Card/CardEdit'));
+const CardPreview = lazy(() => import('@/pages/Card/CardPreview'));
+const PublicCardView = lazy(() => import('@/pages/Card/PublicCardView'));
 
 let routes = {
   expense: [],
@@ -44,64 +36,37 @@ let routes = {
       path: '/about',
       element: <About />,
     },
+
+    // === MAIN ROUTES ===
     {
       path: '/',
       element: <Dashboard />,
     },
+
+    // === CARD MANAGEMENT (ProCard SaaS) ===
     {
-      path: '/customer',
-      element: <Customer />,
+      path: '/cards',
+      element: <CardList />,
+    },
+    {
+      path: '/cards/create',
+      element: <CardCreate />,
+    },
+    {
+      path: '/cards/edit/:id',
+      element: <CardEdit />,
+    },
+    {
+      path: '/cards/:id/preview',
+      element: <CardPreview />,
+    },
+    // === PUBLIC CARD VIEW (No Auth Required) ===
+    {
+      path: '/cards/v/:slug',
+      element: <PublicCardView />,
     },
 
-    {
-      path: '/invoice',
-      element: <Invoice />,
-    },
-    {
-      path: '/invoice/create',
-      element: <InvoiceCreate />,
-    },
-    {
-      path: '/invoice/read/:id',
-      element: <InvoiceRead />,
-    },
-    {
-      path: '/invoice/update/:id',
-      element: <InvoiceUpdate />,
-    },
-    {
-      path: '/invoice/pay/:id',
-      element: <InvoiceRecordPayment />,
-    },
-    {
-      path: '/quote',
-      element: <Quote />,
-    },
-    {
-      path: '/quote/create',
-      element: <QuoteCreate />,
-    },
-    {
-      path: '/quote/read/:id',
-      element: <QuoteRead />,
-    },
-    {
-      path: '/quote/update/:id',
-      element: <QuoteUpdate />,
-    },
-    {
-      path: '/payment',
-      element: <Payment />,
-    },
-    {
-      path: '/payment/read/:id',
-      element: <PaymentRead />,
-    },
-    {
-      path: '/payment/update/:id',
-      element: <PaymentUpdate />,
-    },
-
+    // === SETTINGS ===
     {
       path: '/settings',
       element: <Settings />,
@@ -110,19 +75,14 @@ let routes = {
       path: '/settings/edit/:settingsKey',
       element: <Settings />,
     },
-    {
-      path: '/payment/mode',
-      element: <PaymentMode />,
-    },
-    {
-      path: '/taxes',
-      element: <Taxes />,
-    },
 
+    // === USER ===
     {
       path: '/profile',
       element: <Profile />,
     },
+
+    // === 404 ===
     {
       path: '*',
       element: <NotFound />,

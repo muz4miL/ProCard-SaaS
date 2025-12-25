@@ -1,0 +1,408 @@
+/* ===================================
+   STANDALONE PUBLIC CARD VIEW - 10/10 SaaS
+   Premium vCard / Linktree Style
+   =================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* === WRAPPER (Full Screen, Centered) === */
+.public-standalone-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+.public-standalone-card {
+    width: 100%;
+    max-width: 450px;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    animation: slideUp 0.6s ease-out;
+}
+
+/* === HEADER GRADIENT === */
+.public-header-gradient {
+    height: 220px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 60px;
+    position: relative;
+}
+
+.public-avatar-large {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 6px solid white;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: white;
+    animation: popIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s both;
+}
+
+.public-avatar-large img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-letter-large {
+    font-size: 64px;
+    font-weight: 800;
+    color: white;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* === CONTENT SECTION === */
+.public-content-section {
+    padding: 40px 32px 32px;
+    text-align: center;
+}
+
+/* === NAME & TITLE === */
+.public-name-section {
+    margin-bottom: 24px;
+}
+
+.public-name-large {
+    font-size: 32px;
+    font-weight: 800;
+    color: #111827;
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.public-title-large {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 6px;
+    line-height: 1.4;
+}
+
+.public-company-large {
+    font-size: 15px;
+    color: #6b7280;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* === BIO === */
+.public-bio-large {
+    margin-bottom: 32px;
+    padding: 0 8px;
+}
+
+.public-bio-large p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #4b5563;
+    margin: 0;
+}
+
+/* === CONTACT ACTION TILES === */
+.public-contact-tiles {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.contact-tile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    background: #f9fafb;
+    border: 2px solid #e5e7eb;
+    border-radius: 16px;
+    text-decoration: none;
+    color: #111827;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-tile:hover {
+    background: white;
+    border-color: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(37, 99, 235, 0.15);
+}
+
+.tile-icon {
+    font-size: 22px;
+    color: #6b7280;
+    min-width: 22px;
+}
+
+.tile-text {
+    flex: 1;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* === SOCIAL LINKS GRID === */
+.public-socials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.social-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 12px;
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 14px;
+    text-decoration: none;
+    color: #374151;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.social-tile:hover {
+    background: #f9fafb;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.social-tile .anticon {
+    font-size: 24px;
+}
+
+/* === ACTION BUTTONS === */
+.public-action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.action-btn-primary,
+.action-btn-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 24px;
+    border: none;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Inter', sans-serif;
+}
+
+.action-btn-primary {
+    background: #2563eb;
+    color: white;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+}
+
+.action-btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
+}
+
+.action-btn-primary:active {
+    transform: translateY(-1px);
+}
+
+.action-btn-secondary {
+    background: white;
+    color: #374151;
+    border: 2px solid #e5e7eb;
+}
+
+.action-btn-secondary:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.action-btn-primary .anticon,
+.action-btn-secondary .anticon {
+    font-size: 18px;
+}
+
+/* === FOOTER === */
+.public-footer-subtle {
+    padding-top: 24px;
+    border-top: 1px solid #f3f4f6;
+}
+
+.public-footer-subtle p {
+    font-size: 13px;
+    color: #9ca3af;
+    margin: 0;
+}
+
+.public-footer-subtle strong {
+    color: #2563eb;
+    font-weight: 600;
+}
+
+/* === LOADING & ERROR STATES === */
+.public-standalone-loading,
+.public-standalone-error {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.error-content {
+    text-align: center;
+    padding: 40px;
+}
+
+.error-content h1 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #111827;
+    margin: 0 0 12px;
+}
+
+.error-content p {
+    font-size: 16px;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* === ANIMATIONS === */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-out 0.3s both;
+}
+
+.fade-in-delay-1 {
+    animation: fadeIn 0.6s ease-out 0.4s both;
+}
+
+.fade-in-delay-2 {
+    animation: fadeIn 0.6s ease-out 0.5s both;
+}
+
+.fade-in-delay-3 {
+    animation: fadeIn 0.6s ease-out 0.6s both;
+}
+
+.fade-in-delay-4 {
+    animation: fadeIn 0.6s ease-out 0.7s both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* === RESPONSIVE (Mobile First) === */
+@media (max-width: 480px) {
+    .public-standalone-wrapper {
+        padding: 0;
+        align-items: flex-start;
+    }
+
+    .public-standalone-card {
+        border-radius: 0;
+        min-height: 100vh;
+        box-shadow: none;
+    }
+
+    .public-content-section {
+        padding: 32px 24px 24px;
+    }
+
+    .public-name-large {
+        font-size: 28px;
+    }
+
+    .contact-tile {
+        padding: 16px 18px;
+    }
+
+    .public-socials-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+}
+
+/* === SMOOTH SCROLLING === */
+html {
+    scroll-behavior: smooth;
+}
+
+/* === DISABLE SELECTION ON BUTTONS === */
+.action-btn-primary,
+.action-btn-secondary,
+.contact-tile,
+.social-tile {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+/* === ACCESSIBILITY === */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

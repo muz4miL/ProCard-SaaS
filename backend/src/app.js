@@ -14,6 +14,9 @@ const adminAuth = require('./controllers/coreControllers/adminAuth');
 const errorHandlers = require('./handlers/errorHandlers');
 const erpApiRouter = require('./routes/appRoutes/appApi');
 
+// === PROCARD SAAS - CARD ROUTES ===
+const cardRouter = require('./routes/appRoutes/cardRoutes');
+
 const fileUpload = require('express-fileupload');
 // create our Express app
 const app = express();
@@ -36,9 +39,19 @@ app.use(compression());
 
 // Here our API Routes
 
+// === AUTH ROUTES (No middleware) ===
 app.use('/api', coreAuthRouter);
+
+// === PROCARD SAAS - CARD ROUTES ===
+// ⚠️ MUST BE BEFORE GLOBAL AUTH MIDDLEWARE!
+// This allows /api/cards/public/* to be accessed without auth
+app.use('/api/cards', cardRouter);
+
+// === GLOBAL AUTH MIDDLEWARE ===
+// Everything below requires authentication
 app.use('/api', adminAuth.isValidAuthToken, coreApiRouter);
 app.use('/api', adminAuth.isValidAuthToken, erpApiRouter);
+
 app.use('/download', coreDownloadRouter);
 app.use('/public', corePublicRouter);
 

@@ -1,6 +1,9 @@
 {
-  "name": "idurar-erp-crm",
-  "version": "4.1.0",
+  "name": "procard-saas-backend",
+  "version": "1.0.0",
+  "description": "Enterprise-grade Digital Business Card SaaS API. Multi-tenant architecture with QR generation, vCard export, and real-time analytics.",
+  "author": "Your Name <your.email@example.com>",
+  "license": "Commercial",
   "engines": {
     "npm": "10.2.4",
     "node": "20.9.0"
@@ -37,9 +40,13 @@
     "node-cache": "^5.1.2",
     "openai": "^4.27.0",
     "pug": "^3.0.2",
+    "qrcode": "^1.5.4",
     "resend": "^2.0.0",
+    "sharp": "^0.34.5",
     "shortid": "^2.2.16",
-    "transliteration": "^2.3.5"
+    "transliteration": "^2.3.5",
+    "vcard": "^0.1.0",
+    "vcard-creator": "^0.7.2"
   },
   "devDependencies": {
     "nodemon": "3.0.1"
@@ -48,15 +55,12 @@
     "@": "src"
   },
   "main": "server.js",
-  "author": "IDURAR",
-  "email": "hello@idurarapp.com",
-  "license": "Fair-code License",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/idurar/idurar-erp-crm/.git"
+    "url": "git+https://github.com/yourusername/procard-saas.git"
   },
   "bugs": {
-    "url": "https://github.com/idurar/idurar-erp-crm//issues"
+    "url": "https://github.com/yourusername/procard-saas/issues"
   },
-  "homepage": "https://github.com/idurar/idurar-erp-crm/#readme"
+  "homepage": "https://github.com/yourusername/procard-saas#readme"
 }
