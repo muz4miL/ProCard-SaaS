@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { message, Spin } from 'antd';
+import { message, Spin, Modal } from 'antd';
 import {
     MailOutlined,
     PhoneOutlined,
@@ -12,7 +12,9 @@ import {
     FacebookOutlined,
     InstagramOutlined,
     GithubOutlined,
+    QrcodeOutlined,
 } from '@ant-design/icons';
+import { QRCodeCanvas } from 'qrcode.react';
 import './PublicCardView.css';
 
 const PublicCardView = () => {
@@ -20,6 +22,7 @@ const PublicCardView = () => {
     const [card, setCard] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [qrModalVisible, setQrModalVisible] = useState(false);
 
     useEffect(() => {
         fetchCard();
@@ -227,6 +230,10 @@ const PublicCardView = () => {
                             <DownloadOutlined />
                             <span>💾 Save Contact</span>
                         </button>
+                        <button onClick={() => setQrModalVisible(true)} className="action-btn-secondary">
+                            <QrcodeOutlined />
+                            <span>Show QR Code</span>
+                        </button>
                         <button onClick={handleShare} className="action-btn-secondary">
                             <ShareAltOutlined />
                             <span>Share Card</span>
@@ -243,6 +250,52 @@ const PublicCardView = () => {
                     )}
                 </div>
             </div>
+
+            {/* QR Code Modal */}
+            <Modal
+                title={null}
+                open={qrModalVisible}
+                onCancel={() => setQrModalVisible(false)}
+                footer={null}
+                centered
+                width={400}
+                styles={{
+                    body: { padding: '40px 32px' }
+                }}
+            >
+                <div style={{ textAlign: 'center' }}>
+                    <QRCodeCanvas
+                        value={window.location.href}
+                        size={280}
+                        level="H"
+                        includeMargin={true}
+                        style={{
+                            border: '12px solid white',
+                            borderRadius: '16px',
+                            boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
+                        }}
+                    />
+                    <p
+                        style={{
+                            marginTop: '24px',
+                            fontSize: '15px',
+                            fontWeight: 600,
+                            color: '#374151',
+                        }}
+                    >
+                        Scan to view this card
+                    </p>
+                    <p
+                        style={{
+                            fontSize: '13px',
+                            color: '#9ca3af',
+                            margin: '8px 0 0',
+                        }}
+                    >
+                        Point your camera at this code
+                    </p>
+                </div>
+            </Modal>
         </div>
     );
 };

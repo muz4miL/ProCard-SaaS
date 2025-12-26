@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, ColorPicker, Row, Col, message, Space, Divider } from 'antd';
 import {
     SaveOutlined,
@@ -15,7 +15,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import './CardForm.css';
 
-const CardForm = () => {
+const CardForm = ({ initialValues = null, isUpdate = false }) => {
     const [form] = Form.useForm();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -32,6 +32,42 @@ const CardForm = () => {
         bio: '',
         primaryColor: '#2563eb',
     });
+
+    // === PRE-FILL FORM IF EDITING ===
+    useEffect(() => {
+        if (initialValues && isUpdate) {
+            console.log('📝 EDIT MODE: Pre-filling form with:', initialValues);
+
+            // Set form values
+            form.setFieldsValue({
+                name: initialValues.content?.name || '',
+                title: initialValues.content?.title || '',
+                company: initialValues.content?.company || '',
+                bio: initialValues.content?.bio || '',
+                email: initialValues.contact?.email || '',
+                phone: initialValues.contact?.phone || '',
+                website: initialValues.contact?.website || '',
+                primaryColor: initialValues.branding?.primaryColor || '#2563eb',
+            });
+
+            // Set social links
+            if (initialValues.socials && initialValues.socials.length > 0) {
+                setSocials(initialValues.socials);
+            }
+
+            // Set preview data
+            setPreviewData({
+                name: initialValues.content?.name || '',
+                title: initialValues.content?.title || '',
+                company: initialValues.content?.company || '',
+                bio: initialValues.content?.bio || '',
+                email: initialValues.contact?.email || '',
+                phone: initialValues.contact?.phone || '',
+                website: initialValues.contact?.website || '',
+                primaryColor: initialValues.branding?.primaryColor || '#2563eb',
+            });
+        }
+    }, [initialValues, isUpdate, form]);
 
     // Handle form value changes for live preview
     const handleValuesChange = (changedValues, allValues) => {
@@ -137,14 +173,18 @@ const CardForm = () => {
                 socials: socials.filter((s) => s.url),
             };
 
-            // 4. The Request (RAW token, no Bearer prefix)
-            console.log('📤 Sending card data:', cardData);
+            // 4. The Request - CREATE or UPDATE
+            const apiUrl = isUpdate ? `/api/cards/${initialValues._id}` : '/api/cards';
+            const method = isUpdate ? 'PATCH' : 'POST';
 
-            const response = await fetch('/api/cards', {
-                method: 'POST',
+            console.log(`📤 ${method} request to:`, apiUrl);
+            console.log('� Sending card data:', cardData);
+
+            const response = await fetch(apiUrl, {
+                method: method,
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${authToken}`, // Backend expects "Bearer <token>" format!
+                    'Authorization': `Bearer ${authToken}`,
                 },
                 body: JSON.stringify(cardData),
             });
@@ -158,8 +198,12 @@ const CardForm = () => {
             if (response.ok && data.success) {
                 // Success!
                 console.log('✅ SUCCESS!');
+                const successMessage = isUpdate
+                    ? '✅ Card updated successfully!'
+                    : '🎉 Your digital card is live!';
+
                 message.success({
-                    content: '🎉 Your digital card is live!',
+                    content: successMessage,
                     duration: 3,
                     style: {
                         marginTop: '20vh',
@@ -363,7 +407,10 @@ const CardForm = () => {
                                         className="premium-submit-btn"
                                         block
                                     >
-                                        {loading ? 'Creating Your Card...' : 'Create Card'}
+                                        {loading
+                                            ? (isUpdate ? 'Updating Card...' : 'Creating Your Card...')
+                                            : (isUpdate ? 'Update Card' : 'Create Card')
+                                        }
                                     </Button>
                                 </Form.Item>
                             </Form>

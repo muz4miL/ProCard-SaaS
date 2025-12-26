@@ -1,19 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { Card, Row, Col, Button, Popconfirm, message, Empty, Spin, Tag } from 'antd';
+import React, { useState, useEffect, useRef } from 'react';
+import { Card, Row, Col, Button, Popconfirm, message, Empty, Spin, Tag, Modal } from 'antd';
 import {
     PlusOutlined,
     EyeOutlined,
     EditOutlined,
     DeleteOutlined,
     QrcodeOutlined,
+    DownloadOutlined,
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import { QRCodeCanvas } from 'qrcode.react';
+import { toPng } from 'html-to-image';
 import './CardList.css';
 
 const CardList = () => {
     const navigate = useNavigate();
     const [cards, setCards] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [qrModalVisible, setQrModalVisible] = useState(false);
+    const [selectedCard, setSelectedCard] = useState(null);
+    const qrRef = useRef(null);
 
     // Token extraction helper (same as CardForm)
     const getCleanToken = () => {
@@ -91,6 +97,32 @@ const CardList = () => {
         } catch (error) {
             console.error('Error deleting card:', error);
             message.error('Failed to delete card');
+        }
+    };
+
+    // Open QR Modal
+    const showQRModal = (card) => {
+        setSelectedCard(card);
+        setQrModalVisible(true);
+    };
+
+    // Download QR Code as PNG
+    const downloadQR = async () => {
+        if (qrRef.current) {
+            try {
+                const dataUrl = await toPng(qrRef.current, {
+                    quality: 1,
+                    pixelRatio: 2, // Higher resolution
+                });
+                const link = document.createElement('a');
+                link.download = `${selectedCard.slug}-qr-code.png`;
+                link.href = dataUrl;
+                link.click();
+                message.success('QR Code downloaded!');
+            } catch (err) {
+                console.error('Failed to download QR:', err);
+                message.error('Failed to download QR code');
+            }
         }
     };
 
@@ -217,6 +249,14 @@ const CardList = () => {
                                 </Button>,
                                 <Button
                                     type="text"
+                                    icon={<QrcodeOutlined />}
+                                    onClick={() => showQRModal(card)}
+                                    title="View QR Code"
+                                >
+                                    QR Code
+                                </Button>,
+                                <Button
+                                    type="text"
                                     icon={<EditOutlined />}
                                     onClick={() => navigate(`/cards/edit/${card._id}`)}
                                     title="Edit Card"
@@ -271,6 +311,80 @@ const CardList = () => {
                     </Col>
                 ))}
             </Row>
+
+            {/* QR Code Modal */}
+            <Modal
+                title={
+                    <div style={{ textAlign: 'center' }}>
+                        <QrcodeOutlined style={{ fontSize: '24px', marginRight: '8px', color: '#2563eb' }} />
+                        QR Code - {selectedCard?.content?.name}
+                    </div>
+                }
+                open={qrModalVisible}
+                onCancel={() => setQrModalVisible(false)}
+                footer={[
+                    <Button key="close" onClick={() => setQrModalVisible(false)}>
+                        Close
+                    </Button>,
+                    <Button
+                        key="download"
+                        type="primary"
+                        icon={<DownloadOutlined />}
+                        onClick={downloadQR}
+                    >
+                        Download PNG
+                    </Button>,
+                ]}
+                centered
+                width={450}
+            >
+                <div
+                    ref={qrRef}
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        padding: '32px',
+                        background: 'white',
+                    }}
+                >
+                    {selectedCard && (
+                        <>
+                            <QRCodeCanvas
+                                value={`${window.location.origin}/cards/v/${selectedCard.slug}`}
+                                size={280}
+                                level="H"
+                                includeMargin={true}
+                                style={{
+                                    border: '8px solid white',
+                                    borderRadius: '12px',
+                                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                                }}
+                            />
+                            <p
+                                style={{
+                                    marginTop: '24px',
+                                    fontSize: '14px',
+                                    color: '#6b7280',
+                                    textAlign: 'center',
+                                }}
+                            >
+                                Scan this code to view the digital card
+                            </p>
+                            <p
+                                style={{
+                                    fontSize: '12px',
+                                    color: '#9ca3af',
+                                    wordBreak: 'break-all',
+                                    textAlign: 'center',
+                                }}
+                            >
+                                {window.location.origin}/cards/v/{selectedCard.slug}
+                            </p>
+                        </>
+                    )}
+                </div>
+            </Modal>
         </div>
     );
 };
