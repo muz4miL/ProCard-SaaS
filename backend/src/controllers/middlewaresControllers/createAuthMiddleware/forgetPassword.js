@@ -66,7 +66,7 @@ const forgetPassword = async (req, res, { userModel }) => {
     link,
     subject: 'Reset your password | idurar',
     idurar_app_email,
-    type: 'passwordVerfication',
+    type: 'passwordVerification',
   });
 
   return res.status(200).json({
