@@ -1,4 +1,4 @@
-const Card = require('@/models/appModels/Card');
+const Card = require('../../../models/appModels/Card.js');
 
 /**
  * Read card(s) - Supports both single and list operations

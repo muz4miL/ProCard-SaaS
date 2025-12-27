@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const cardController = require('@/controllers/appControllers/cardController');
-const adminAuth = require('@/controllers/coreControllers/adminAuth');
+const cardController = require('../../controllers/appControllers/cardController/index.js');
+const adminAuth = require('../../controllers/coreControllers/adminAuth/index.js');
 
 // ============================================
 // ⚠️⚠️⚠️ PUBLIC ROUTES - ABSOLUTE TOP PRIORITY! ⚠️⚠️⚠️
