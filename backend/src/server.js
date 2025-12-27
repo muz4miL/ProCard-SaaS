@@ -33,7 +33,15 @@ for (const filePath of modelsFiles) {
 
 // Start our app!
 const app = require('./app');
-app.set('port', process.env.PORT || 8888);
-const server = app.listen(app.get('port'), () => {
-  console.log(`Express running → On PORT : ${server.address().port}`);
-});
+
+// Only run the server on a specific port if we are NOT in production
+// (Vercel handles the port automatically in production)
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 8888;
+  app.listen(PORT, () => {
+    console.log(`Server running locally on port ${PORT}`);
+  });
+}
+
+// Export the app for Vercel serverless functions
+module.exports = app;
