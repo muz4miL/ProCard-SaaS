@@ -13,6 +13,7 @@ import {
     CloseOutlined,
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '@/config/serverApiConfig';
 import './CardForm.css';
 
 const CardForm = ({ initialValues = null, isUpdate = false }) => {
@@ -174,7 +175,9 @@ const CardForm = ({ initialValues = null, isUpdate = false }) => {
             };
 
             // 4. The Request - CREATE or UPDATE
-            const apiUrl = isUpdate ? `/api/cards/${initialValues._id}` : '/api/cards';
+            const apiUrl = isUpdate
+                ? `${API_BASE_URL}cards/${initialValues._id}`
+                : `${API_BASE_URL}cards`;
             const method = isUpdate ? 'PATCH' : 'POST';
 
             console.log(`📤 ${method} request to:`, apiUrl);

@@ -15,6 +15,7 @@ import {
     QrcodeOutlined,
 } from '@ant-design/icons';
 import { QRCodeCanvas } from 'qrcode.react';
+import { API_BASE_URL } from '@/config/serverApiConfig';
 import './PublicCardView.css';
 
 const PublicCardView = () => {
@@ -32,7 +33,7 @@ const PublicCardView = () => {
         try {
             setLoading(true);
 
-            const publicUrl = `/api/cards/public/v/${slug}`;
+            const publicUrl = `${API_BASE_URL}cards/public/v/${slug}`;
             console.log('🔓 Fetching from PUBLIC route:', publicUrl);
 
             const response = await fetch(publicUrl, {
@@ -63,7 +64,7 @@ const PublicCardView = () => {
     };
 
     const handleDownloadVCard = () => {
-        const vcfUrl = `/api/cards/public/v/${slug}/vcf`;
+        const vcfUrl = `${API_BASE_URL}cards/public/v/${slug}/vcf`;
         console.log('💾 Downloading vCard from:', vcfUrl);
         window.open(vcfUrl, '_blank');
         message.success('Downloading contact...', 2);
@@ -100,16 +101,19 @@ const PublicCardView = () => {
 
     if (loading) {
         return (
-            <div className="public-standalone-loading">
-                <Spin size="large" />
+            <div className="premium-card-wrapper">
+                <div className="premium-card-container premium-card-loading">
+                    <Spin size="large" className="premium-spinner" />
+                </div>
             </div>
         );
     }
 
     if (error || !card) {
         return (
-            <div className="public-standalone-error">
-                <div className="error-content">
+            <div className="premium-card-wrapper">
+                <div className="premium-card-container premium-card-error">
+                    <div className="error-icon">🔍</div>
                     <h1>Card Not Found</h1>
                     <p>{error || "This digital card doesn't exist."}</p>
                 </div>
@@ -117,68 +121,75 @@ const PublicCardView = () => {
         );
     }
 
-    const brandColor = card.branding?.primaryColor || '#2563eb';
+    const brandColor = card.branding?.primaryColor || '#6366f1';
 
     return (
-        <div className="public-standalone-wrapper">
-            <div className="public-standalone-card">
-                {/* Header with Gradient */}
+        <div className="premium-card-wrapper">
+            <div className="premium-card-container">
+                {/* Premium Header Section */}
                 <div
-                    className="public-header-gradient"
+                    className="premium-header"
                     style={{
-                        background: `linear-gradient(180deg, ${brandColor} 0%, ${brandColor}dd 50%, #ffffff 100%)`,
+                        background: `linear-gradient(135deg, ${brandColor} 0%, ${brandColor}cc 50%, ${adjustColorBrightness(brandColor, -20)} 100%)`,
                     }}
                 >
-                    <div
-                        className="public-avatar-large"
-                        style={{
-                            backgroundColor: brandColor,
-                        }}
-                    >
-                        {card.content?.avatar ? (
-                            <img src={card.content.avatar} alt={card.content.name} />
-                        ) : (
-                            <span className="avatar-letter-large">
-                                {card.content?.name?.charAt(0).toUpperCase() || 'U'}
-                            </span>
-                        )}
+                    {/* Avatar with glow effect */}
+                    <div className="premium-avatar-wrapper">
+                        <div
+                            className="premium-avatar-glow"
+                            style={{ boxShadow: `0 0 40px ${brandColor}60, 0 0 80px ${brandColor}30` }}
+                        >
+                            <div className="premium-avatar">
+                                {card.content?.avatar ? (
+                                    <img src={card.content.avatar} alt={card.content.name} />
+                                ) : (
+                                    <span className="avatar-fallback">
+                                        {card.content?.name?.charAt(0).toUpperCase() || 'U'}
+                                    </span>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                {/* Content Section */}
-                <div className="public-content-section">
+                {/* Glassmorphism Card Content */}
+                <div className="premium-content">
                     {/* Name & Title */}
-                    <div className="public-name-section fade-in">
-                        <h1 className="public-name-large">{card.content?.name || 'Anonymous'}</h1>
+                    <div className="premium-name-section">
+                        <h1 className="premium-name">{card.content?.name || 'Anonymous'}</h1>
                         {card.content?.title && (
-                            <p className="public-title-large" style={{ color: brandColor }}>
+                            <p className="premium-title" style={{ color: brandColor }}>
                                 {card.content.title}
                             </p>
                         )}
                         {card.content?.company && (
-                            <p className="public-company-large">{card.content.company}</p>
+                            <p className="premium-company">{card.content.company}</p>
                         )}
                     </div>
 
                     {/* Bio */}
                     {card.content?.bio && (
-                        <div className="public-bio-large fade-in-delay-1">
+                        <div className="premium-bio">
                             <p>{card.content.bio}</p>
                         </div>
                     )}
 
-                    {/* Contact Action Tiles */}
-                    <div className="public-contact-tiles fade-in-delay-2">
+                    {/* Contact Links */}
+                    <div className="premium-contact-section">
                         {card.contact?.email && (
-                            <a href={`mailto:${card.contact.email}`} className="contact-tile">
-                                <MailOutlined className="tile-icon" />
-                                <span className="tile-text">{card.contact.email}</span>
+                            <a href={`mailto:${card.contact.email}`} className="premium-contact-link">
+                                <div className="premium-contact-icon">
+                                    <MailOutlined />
+                                </div>
+                                <span className="premium-contact-text">{card.contact.email}</span>
                             </a>
                         )}
                         {card.contact?.phone && (
-                            <a href={`tel:${card.contact.phone}`} className="contact-tile">
-                                <PhoneOutlined className="tile-icon" />
-                                <span className="tile-text">{card.contact.phone}</span>
+                            <a href={`tel:${card.contact.phone}`} className="premium-contact-link">
+                                <div className="premium-contact-icon">
+                                    <PhoneOutlined />
+                                </div>
+                                <span className="premium-contact-text">{card.contact.phone}</span>
                             </a>
                         )}
                         {card.contact?.website && (
@@ -190,114 +201,139 @@ const PublicCardView = () => {
                                 }
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="contact-tile"
+                                className="premium-contact-link"
                             >
-                                <GlobalOutlined className="tile-icon" />
-                                <span className="tile-text">{card.contact.website}</span>
+                                <div className="premium-contact-icon">
+                                    <GlobalOutlined />
+                                </div>
+                                <span className="premium-contact-text">{card.contact.website}</span>
                             </a>
                         )}
                     </div>
 
-                    {/* Social Links */}
+                    {/* Social Links as Premium Pills */}
                     {card.socials && card.socials.length > 0 && (
-                        <div className="public-socials-grid fade-in-delay-3">
+                        <div className="premium-socials">
                             {card.socials.map((social, index) => (
                                 <a
                                     key={index}
                                     href={social.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="social-tile"
-                                    style={{ borderColor: `${brandColor}40` }}
+                                    className="premium-social-pill"
+                                    style={{
+                                        borderColor: `${brandColor}40`,
+                                        backgroundColor: `${brandColor}08`,
+                                    }}
                                 >
-                                    {getSocialIcon(social.platform)}
-                                    <span>{social.platform}</span>
+                                    <span className="premium-social-icon">
+                                        {getSocialIcon(social.platform)}
+                                    </span>
+                                    <span className="premium-social-name">{social.platform}</span>
                                 </a>
                             ))}
                         </div>
                     )}
 
-                    {/* Action Buttons */}
-                    <div className="public-action-buttons fade-in-delay-4">
+                    {/* Premium Action Buttons */}
+                    <div className="premium-actions">
                         <button
                             onClick={handleDownloadVCard}
-                            className="action-btn-primary"
+                            className="premium-btn premium-btn-primary"
                             style={{
-                                backgroundColor: brandColor,
-                                borderColor: brandColor,
+                                background: `linear-gradient(135deg, ${brandColor} 0%, ${adjustColorBrightness(brandColor, -15)} 100%)`,
+                                boxShadow: `0 8px 24px ${brandColor}50`,
                             }}
                         >
-                            <DownloadOutlined />
-                            <span>💾 Save Contact</span>
+                            <DownloadOutlined className="premium-btn-icon" />
+                            <span>Save Contact</span>
                         </button>
-                        <button onClick={() => setQrModalVisible(true)} className="action-btn-secondary">
-                            <QrcodeOutlined />
-                            <span>Show QR Code</span>
-                        </button>
-                        <button onClick={handleShare} className="action-btn-secondary">
-                            <ShareAltOutlined />
-                            <span>Share Card</span>
-                        </button>
+
+                        <div className="premium-actions-row">
+                            <button
+                                onClick={() => setQrModalVisible(true)}
+                                className="premium-btn premium-btn-secondary"
+                            >
+                                <QrcodeOutlined className="premium-btn-icon" />
+                                <span>Show QR</span>
+                            </button>
+                            <button
+                                onClick={handleShare}
+                                className="premium-btn premium-btn-secondary"
+                            >
+                                <ShareAltOutlined className="premium-btn-icon" />
+                                <span>Share</span>
+                            </button>
+                        </div>
                     </div>
 
-                    {/* Footer */}
+                    {/* Premium Footer */}
                     {!card.features?.hideBranding && (
-                        <div className="public-footer-subtle">
-                            <p>
-                                Powered by <strong>ProCard</strong> 💼
-                            </p>
+                        <div className="premium-footer">
+                            <span className="premium-footer-brand">
+                                <span className="heart">💎</span> ProCard
+                            </span>
                         </div>
                     )}
                 </div>
             </div>
 
-            {/* QR Code Modal */}
+            {/* Premium QR Code Modal */}
             <Modal
                 title={null}
                 open={qrModalVisible}
                 onCancel={() => setQrModalVisible(false)}
                 footer={null}
                 centered
-                width={400}
+                width={420}
                 styles={{
-                    body: { padding: '40px 32px' }
+                    body: { padding: '48px 32px' }
                 }}
+                className="premium-qr-modal"
+                closeIcon={<span className="premium-modal-close">✕</span>}
             >
-                <div style={{ textAlign: 'center' }}>
-                    <QRCodeCanvas
-                        value={window.location.href}
-                        size={280}
-                        level="H"
-                        includeMargin={true}
-                        style={{
-                            border: '12px solid white',
-                            borderRadius: '16px',
-                            boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
-                        }}
-                    />
-                    <p
-                        style={{
-                            marginTop: '24px',
-                            fontSize: '15px',
-                            fontWeight: 600,
-                            color: '#374151',
-                        }}
-                    >
-                        Scan to view this card
+                <div className="premium-qr-content">
+                    <div className="premium-qr-title">Scan to Connect</div>
+                    <p className="premium-qr-subtitle">
+                        Point your camera at this QR code to view this digital card
                     </p>
-                    <p
-                        style={{
-                            fontSize: '13px',
-                            color: '#9ca3af',
-                            margin: '8px 0 0',
-                        }}
-                    >
-                        Point your camera at this code
-                    </p>
+
+                    <div className="premium-qr-wrapper">
+                        <div className="premium-qr-inner" style={{ borderColor: brandColor }}>
+                            <QRCodeCanvas
+                                value={window.location.href}
+                                size={240}
+                                level="H"
+                                includeMargin={true}
+                                style={{ width: '100%', height: 'auto' }}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="premium-qr-url">
+                        {window.location.href}
+                    </div>
                 </div>
             </Modal>
         </div>
     );
 };
+
+// Helper function to adjust color brightness
+function adjustColorBrightness(color, percent) {
+    const num = parseInt(color.replace('#', ''), 16);
+    const amt = Math.round(2.55 * percent);
+    const R = (num >> 16) + amt;
+    const G = (num >> 8 & 0x00FF) + amt;
+    const B = (num & 0x0000FF) + amt;
+
+    const clamp = (val) => Math.min(255, Math.max(0, val));
+
+    return '#' + (0x1000000 +
+        (clamp(R) << 16) +
+        (clamp(G) << 8) +
+        clamp(B)
+    ).toString(16).slice(1);
+}
 
 export default PublicCardView;

@@ -11,6 +11,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { QRCodeCanvas } from 'qrcode.react';
 import { toPng } from 'html-to-image';
+import { API_BASE_URL } from '@/config/serverApiConfig';
 import './CardList.css';
 
 const CardList = () => {
@@ -52,7 +53,7 @@ const CardList = () => {
                 return;
             }
 
-            const response = await fetch('/api/cards', {
+            const response = await fetch(`${API_BASE_URL}cards`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -79,7 +80,7 @@ const CardList = () => {
         try {
             const token = getCleanToken();
 
-            const response = await fetch(`/api/cards/${id}`, {
+            const response = await fetch(`${API_BASE_URL}cards/${id}`, {
                 method: 'DELETE',
                 headers: {
                     Authorization: `Bearer ${token}`,

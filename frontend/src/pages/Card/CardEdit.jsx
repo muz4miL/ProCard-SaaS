@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Spin, Result, Button } from 'antd';
 import { EditOutlined, ArrowLeftOutlined } from '@ant-design/icons';
+import { API_BASE_URL } from '@/config/serverApiConfig';
 import CardForm from '@/forms/CardForm';
 
 const CardEdit = () => {
@@ -44,7 +45,7 @@ const CardEdit = () => {
 
             console.log('📥 Fetching card for edit, ID:', id);
 
-            const response = await fetch(`/api/cards/${id}`, {
+            const response = await fetch(`${API_BASE_URL}cards/${id}`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${token}`,
