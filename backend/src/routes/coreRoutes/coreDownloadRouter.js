@@ -1,4 +1,5 @@
-const downloadPdf = require('../../handlers/downloadHandler/downloadPdf.js');
+const paths = require('../../config/paths.js');
+const downloadPdf = require(paths.downloadPdf);
 const express = require('express');
 
 const router = express.Router();

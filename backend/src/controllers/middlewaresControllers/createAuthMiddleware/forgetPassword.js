@@ -5,9 +5,10 @@ const mongoose = require('mongoose');
 const checkAndCorrectURL = require('./checkAndCorrectURL');
 const sendMail = require('./sendMail');
 const shortid = require('shortid');
-const { loadSettings } = require('../../../middlewares/settings.js');
+const paths = require('../../../config/paths.js');
+const { loadSettings } = require(paths.settings);
 
-const { useAppSettings } = require('../../../settings/index.js');
+const { useAppSettings } = require(paths.settingsIndex);
 
 const forgetPassword = async (req, res, { userModel }) => {
   const UserPassword = mongoose.model(userModel + 'Password');
