@@ -2,10 +2,10 @@ const pug = require('pug');
 const fs = require('fs');
 const moment = require('moment');
 let pdf = require('html-pdf');
-const { listAllSettings, loadSettings } = require('@/middlewares/settings');
-const { getData } = require('@/middlewares/serverData');
-const useLanguage = require('@/locale/useLanguage');
-const { useMoney, useDate } = require('@/settings');
+const { listAllSettings, loadSettings } = require('../../../../middlewares/settings/index.js');
+const { getData } = require('../../../../middlewares/serverData.js');
+const useLanguage = require('../../../../locale/useLanguage.js');
+const { useMoney, useDate } = require('../../../../settings/index.js');
 
 const pugFiles = ['invoice', 'offer', 'quote', 'payment'];
 

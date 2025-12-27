@@ -1,5 +1,5 @@
-const createCRUDController = require('@/controllers/middlewaresControllers/createCRUDController');
-const { routesList } = require('@/models/utils');
+const createCRUDController = require('../middlewaresControllers/createCRUDController/index.js');
+const { routesList } = require('../../models/utils/index.js');
 
 const { globSync } = require('glob');
 const path = require('path');
@@ -15,7 +15,7 @@ const appControllers = () => {
 
   controllerDirectories.forEach((controllerName) => {
     try {
-      const customController = require('@/controllers/appControllers/' + controllerName);
+      const customController = require('./' + controllerName + '/index.js');
 
       if (customController) {
         hasCustomControllers.push(controllerName);

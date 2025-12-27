@@ -1,4 +1,4 @@
-const Card = require('@/models/appModels/Card');
+const Card = require('../../../../../models/appModels/Card.js');
 
 /**
  * Generate vCard (.vcf) file for "Save Contact" functionality

@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const Model = mongoose.model('Quote');
 
-const custom = require('@/controllers/pdfController');
+const custom = require('../../../../../controllers/pdfController/index.js');
 
-const { calculate } = require('@/helpers');
+const { calculate } = require('../../../../../helpers.js');
 
 const update = async (req, res) => {
   const { items = [], taxRate = 0, discount = 0 } = req.body;
