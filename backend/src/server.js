@@ -24,11 +24,39 @@ mongoose.connection.on('error', (error) => {
   console.error(`2. 🚫 Error → : ${error.message}`);
 });
 
+// ========================================
+// CRITICAL: REGISTER ALL MONGOOSE MODELS FIRST
+// ========================================
+// In Vercel serverless, models must be explicitly registered
+// BEFORE any middleware or route tries to use them
+
+// Core Models - Register explicitly for reliability
+require('./models/coreModels/Admin.js');
+require('./models/coreModels/AdminPassword.js');
+require('./models/coreModels/Setting.js');  // ← This is what listBySettingKey.js needs!
+require('./models/coreModels/Upload.js');
+
+// App Models - Register explicitly
+require('./models/appModels/Card.js');
+require('./models/appModels/Client.js');
+require('./models/appModels/Invoice.js');
+require('./models/appModels/Payment.js');
+require('./models/appModels/PaymentMode.js');
+require('./models/appModels/Quote.js');
+require('./models/appModels/Taxes.js');
+
+// Backup: Also use glob to catch any models we might have missed
 const modelsFiles = globSync('./src/models/**/*.js');
 
 for (const filePath of modelsFiles) {
-  require(path.resolve(filePath));
+  try {
+    require(path.resolve(filePath));
+  } catch (err) {
+    // Already loaded above, ignore duplicate errors
+  }
 }
+
+console.log('✅ All Mongoose models registered successfully');
 
 // Start our app!
 const app = require('./app');
