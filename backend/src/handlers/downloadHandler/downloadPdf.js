@@ -1,4 +1,5 @@
-const custom = require('../../../../controllers/pdfController/index.js');
+const paths = require('../../config/paths.js');
+const custom = require(paths.pdfController);
 const mongoose = require('mongoose');
 
 module.exports = downloadPdf = async (req, res, { directory, id }) => {
