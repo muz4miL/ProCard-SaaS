@@ -1,10 +1,11 @@
+const paths = require('../../../config/paths.js');
 const mongoose = require('mongoose');
 
 const Model = mongoose.model('Payment');
 const Invoice = mongoose.model('Invoice');
-const custom = require('../../../controllers/pdfController/index.js');
+const custom = require(paths.pdfController);
 
-const { calculate } = require('../../../helpers.js');
+const { calculate } = require(paths.helpers);
 
 const update = async (req, res) => {
   if (req.body.amount === 0) {

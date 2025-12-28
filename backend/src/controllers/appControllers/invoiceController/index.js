@@ -1,4 +1,5 @@
-const createCRUDController = require('../../../controllers/middlewaresControllers/createCRUDController/index.js');
+const paths = require('../../../config/paths.js');
+const createCRUDController = require(paths.createCRUDController);
 const methods = createCRUDController('Invoice');
 
 const sendMail = require('./sendMail');

@@ -1,6 +1,7 @@
+const paths = require('../../../config/paths.js');
 const mongoose = require('mongoose');
 const Model = mongoose.model('PaymentMode');
-const createCRUDController = require('../../../controllers/middlewaresControllers/createCRUDController/index.js');
+const createCRUDController = require(paths.createCRUDController);
 const methods = createCRUDController('PaymentMode');
 
 delete methods['delete'];

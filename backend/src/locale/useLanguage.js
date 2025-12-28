@@ -1,4 +1,5 @@
-const { readBySettingKey } = require('../../../middlewares/settings/index.js');
+const paths = require('../config/paths.js');
+const { readBySettingKey } = require(paths.settings);
 
 const getLabel = (lang, key) => {
   try {

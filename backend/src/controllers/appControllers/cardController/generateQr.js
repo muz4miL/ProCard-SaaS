@@ -1,5 +1,6 @@
+const paths = require('../../../config/paths.js');
 const QRCode = require('qrcode');
-const Card = require('../../../models/appModels/Card.js');
+const Card = require(paths.CardModel);
 
 /**
  * Generate QR Code for card's public URL

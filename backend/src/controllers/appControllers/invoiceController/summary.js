@@ -1,9 +1,10 @@
+const paths = require('../../../config/paths.js');
 const mongoose = require('mongoose');
 const moment = require('moment');
 
 const Model = mongoose.model('Invoice');
 
-const { loadSettings } = require('../../../middlewares/settings/index.js');
+const { loadSettings } = require(paths.settings);
 
 const summary = async (req, res) => {
   let defaultType = 'month';

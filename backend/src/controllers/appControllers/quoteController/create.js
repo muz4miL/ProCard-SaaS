@@ -1,10 +1,11 @@
+const paths = require('../../../config/paths.js');
 const mongoose = require('mongoose');
 
 const Model = mongoose.model('Quote');
 
-const custom = require('../../../controllers/pdfController/index.js');
-const { increaseBySettingKey } = require('../../../middlewares/settings/index.js');
-const { calculate } = require('../../../helpers.js');
+const custom = require(paths.pdfController);
+const { increaseBySettingKey } = require(paths.settings);
+const { calculate } = require(paths.helpers);
 
 const create = async (req, res) => {
   const { items = [], taxRate = 0, discount = 0 } = req.body;

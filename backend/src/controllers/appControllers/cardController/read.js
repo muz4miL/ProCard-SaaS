@@ -1,4 +1,5 @@
-const Card = require('../../../models/appModels/Card.js');
+const paths = require('../../../config/paths.js');
+const Card = require(paths.CardModel);
 
 /**
  * Read card(s) - Supports both single and list operations

@@ -1,5 +1,6 @@
+const paths = require('../../../config/paths.js');
 const mongoose = require('mongoose');
-const createCRUDController = require('../../../controllers/middlewaresControllers/createCRUDController/index.js');
+const createCRUDController = require(paths.createCRUDController);
 
 const summary = require('./summary');
 
