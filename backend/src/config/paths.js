@@ -25,15 +25,15 @@ module.exports = {
     pdfController: path.join(srcDir, 'controllers', 'pdfController', 'index.js'),
     appControllers: path.join(srcDir, 'controllers', 'appControllers', 'index.js'),
 
-    // Middlewares
-    settings: path.join(srcDir, 'middlewares', 'settings.js'),
+    // Middlewares - FIXED: These are folders with index.js
+    settings: path.join(srcDir, 'middlewares', 'settings', 'index.js'),
     serverData: path.join(srcDir, 'middlewares', 'serverData.js'),
-    uploadMiddleware: path.join(srcDir, 'middlewares', 'uploadMiddleware.js'),
+    uploadMiddleware: path.join(srcDir, 'middlewares', 'uploadMiddleware', 'index.js'),
 
     // Settings & Locale
     settingsIndex: path.join(srcDir, 'settings', 'index.js'),
     useLanguage: path.join(srcDir, 'locale', 'useLanguage.js'),
 
-    // Helpers
-    helpers: path.join(srcDir, 'helpers', 'index.js'),
+    // Helpers - FIXED: This is a single file, not a folder
+    helpers: path.join(srcDir, 'helpers.js'),
 };
