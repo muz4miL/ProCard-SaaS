@@ -37,8 +37,8 @@ const LoginPage = () => {
           className="login-form"
           initialValues={{
             remember: true,
-            email:'admin@admin.com',
-            password:'admin123',
+            email: 'admin@admin.com',
+            password: 'admin123',
           }}
           onFinish={onFinish}
         >
@@ -50,6 +50,21 @@ const LoginPage = () => {
               className="login-form-button"
               loading={isLoading}
               size="large"
+              style={{
+                width: '100%',
+                background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
+                border: 'none',
+                boxShadow: '0 4px 15px rgba(99, 102, 241, 0.4)',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = '0 6px 25px rgba(99, 102, 241, 0.6)';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = '0 4px 15px rgba(99, 102, 241, 0.4)';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
             >
               {translate('Log in')}
             </Button>

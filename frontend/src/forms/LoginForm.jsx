@@ -9,7 +9,7 @@ export default function LoginForm() {
   return (
     <div>
       <Form.Item
-        label={translate('email')}
+        label={<span style={{ color: '#ffffff' }}>{translate('email')}</span>}
         name="email"
         rules={[
           {
@@ -28,7 +28,7 @@ export default function LoginForm() {
         />
       </Form.Item>
       <Form.Item
-        label={translate('password')}
+        label={<span style={{ color: '#ffffff' }}>{translate('password')}</span>}
         name="password"
         rules={[
           {
@@ -45,9 +45,9 @@ export default function LoginForm() {
 
       <Form.Item>
         <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox>{translate('Remember me')}</Checkbox>
+          <Checkbox style={{ color: '#ffffff' }}>{translate('Remember me')}</Checkbox>
         </Form.Item>
-        <a className="login-form-forgot" href="/forgetpassword" style={{ marginLeft: '0px' }}>
+        <a className="login-form-forgot" href="/forgetpassword" style={{ marginLeft: '0px', color: '#a855f7' }}>
           {translate('Forgot password')}
         </a>
       </Form.Item>

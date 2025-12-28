@@ -28,15 +28,16 @@ const AuthModule = ({ authContent, AUTH_TITLE, isForRegistre = false }) => {
             style={{
               margin: '0px auto 20px',
               display: 'block',
+              filter: 'brightness(0) invert(1)',
             }}
             height={63}
             width={220}
           />
           <div className="space10" />
         </Col>
-        <Title level={1}>{translate(AUTH_TITLE)}</Title>
+        <Title level={1} style={{ color: '#ffffff' }}>{translate(AUTH_TITLE)}</Title>
 
-        <Divider />
+        <Divider style={{ borderColor: 'rgba(255, 255, 255, 0.2)' }} />
         <div className="site-layout-content">{authContent}</div>
       </Content>
     </AuthLayout>
