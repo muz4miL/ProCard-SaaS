@@ -34,6 +34,7 @@ module.exports = {
     settingsIndex: path.join(srcDir, 'settings', 'index.js'),
     useLanguage: path.join(srcDir, 'locale', 'useLanguage.js'),
 
+
     // Helpers - FIXED: This is a single file, not a folder
     helpers: path.join(srcDir, 'helpers.js'),
 };
