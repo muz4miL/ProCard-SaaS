@@ -17,17 +17,21 @@ const createCRUDController = (modelName) => {
     throw new Error(`Model ${modelName} does not exist`);
   }
 
-  const Model = mongoose.model(modelName);
+  // ✅ FIX: Lazy-load the model inside each method
+  // This ensures the model is only retrieved when the route is actually called,
+  // not when the controller is created at module load time
+  const getModel = () => mongoose.model(modelName);
+
   let crudMethods = {
-    create: (req, res) => create(Model, req, res),
-    read: (req, res) => read(Model, req, res),
-    update: (req, res) => update(Model, req, res),
-    delete: (req, res) => remove(Model, req, res),
-    list: (req, res) => paginatedList(Model, req, res),
-    listAll: (req, res) => listAll(Model, req, res),
-    search: (req, res) => search(Model, req, res),
-    filter: (req, res) => filter(Model, req, res),
-    summary: (req, res) => summary(Model, req, res),
+    create: (req, res) => create(getModel(), req, res),
+    read: (req, res) => read(getModel(), req, res),
+    update: (req, res) => update(getModel(), req, res),
+    delete: (req, res) => remove(getModel(), req, res),
+    list: (req, res) => paginatedList(getModel(), req, res),
+    listAll: (req, res) => listAll(getModel(), req, res),
+    search: (req, res) => search(getModel(), req, res),
+    filter: (req, res) => filter(getModel(), req, res),
+    summary: (req, res) => summary(getModel(), req, res),
   };
   return crudMethods;
 };
