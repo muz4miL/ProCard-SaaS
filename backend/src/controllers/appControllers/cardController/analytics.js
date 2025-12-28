@@ -1,4 +1,4 @@
-const Card = require('../../../../../models/appModels/Card.js');
+const Card = require('../../../models/appModels/Card.js');
 
 /**
  * Track analytics for public card views

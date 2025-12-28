@@ -1,4 +1,4 @@
-const Card = require('../../../../../models/appModels/Card.js');
+const Card = require('../../../models/appModels/Card.js');
 
 /**
  * Create a new digital business card

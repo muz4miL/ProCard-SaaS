@@ -1,4 +1,4 @@
-const createCRUDController = require('../../../../../controllers/middlewaresControllers/createCRUDController/index.js');
+const createCRUDController = require('../../middlewaresControllers/createCRUDController/index.js');
 const crudController = createCRUDController('Setting');
 
 const listBySettingKey = require('./listBySettingKey');

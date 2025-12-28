@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const Model = mongoose.model('Invoice');
 
-const { calculate } = require('../../../../../helpers.js');
-const { increaseBySettingKey } = require('../../../../../middlewares/settings/index.js');
+const { calculate } = require('../../../helpers.js');
+const { increaseBySettingKey } = require('../../../middlewares/settings/index.js');
 const schema = require('./schemaValidate');
 
 const create = async (req, res) => {

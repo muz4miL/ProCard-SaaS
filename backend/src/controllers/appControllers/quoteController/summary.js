@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const moment = require('moment');
 
 const Model = mongoose.model('Quote');
-const { loadSettings } = require('../../../../../middlewares/settings/index.js');
+const { loadSettings } = require('../../../middlewares/settings/index.js');
 
 const summary = async (req, res) => {
   let defaultType = 'month';

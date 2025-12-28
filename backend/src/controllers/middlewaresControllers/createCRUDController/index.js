@@ -1,4 +1,4 @@
-const { modelsFiles } = require('../../../../../models/utils/index.js');
+const { modelsFiles } = require('../../../models/utils/index.js');
 
 const mongoose = require('mongoose');
 

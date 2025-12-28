@@ -1,5 +1,5 @@
 const QRCode = require('qrcode');
-const Card = require('../../../../../models/appModels/Card.js');
+const Card = require('../../../models/appModels/Card.js');
 
 /**
  * Generate QR Code for card's public URL

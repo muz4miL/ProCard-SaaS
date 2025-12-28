@@ -1,2 +1,3 @@
-const createUserController = require('../../../../../controllers/middlewaresControllers/createUserController/index.js');
+const paths = require('../../../config/paths.js');
+const createUserController = require(paths.createUserController);
 module.exports = createUserController('Admin');
